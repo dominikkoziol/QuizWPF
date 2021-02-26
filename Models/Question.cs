@@ -11,5 +11,24 @@ namespace Quiz.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string QuestionDescription { get; set; }
+        public string AnswerA { get; set; }
+        public string AnswerB { get; set; }
+        public string AnswerC { get; set; }
+        public string AnswerD { get; set; }
+        public int QuestionLevel { get; set; }
+        public AnswerEnum CorrectAnswer { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
+        [NotMapped]
+        public AnswerEnum Answer { get; set; }
+
+        public enum AnswerEnum
+        {
+            A = 0,
+            B = 1,
+            C = 2
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿<Window x:Class="Quiz.Views.Dialogs.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quiz.Views.Dialogs"
+        mc:Ignorable="d"
+        xmlns:models = "clr-namespace:Quiz.ViewModels.Dialogs"
+        d:DataContext="{d:DesignInstance models:GameViewModel, IsDesignTimeCreatable=True}"
+        Title="Let's play quiz!" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            
+            
+            
+            <!--<RadioButton GroupName="sex" Name="sex1"  Grid.Column="0" IsChecked="True">Male</RadioButton>-->
+            <!--<RadioButton GroupName="sex" Name="sex2" Grid.Column="1">Female</RadioButton>-->
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{Binding CurrentQuestionIndexText,  StringFormat='Question {0} of 5'}" FontSize="35" />
+    </Grid>
+</Window>

@@ -13,9 +13,13 @@ namespace Quiz.Models
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime? FinishTime { get; set; }
-        public ICollection<Question> Questions { get; set; }
-  
-        
+        public StatusEnum Status { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public int CollectedScores { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
         public enum StatusEnum
         {
             /// <summary>

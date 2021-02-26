@@ -1,0 +1,47 @@
+﻿<Window x:Class="Quiz.Views.Dialogs.CreateUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quiz.Views.Dialogs"
+        mc:Ignorable="d"
+        Title="Create User" Height="150" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label FontWeight="Bold" Grid.Column="0" Grid.Row="0">Input your name:</Label>
+        <TextBox Name="nameInput" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,0" />
+        <Label FontWeight="Bold" Grid.Column="1" Grid.Row="0">Choose your gender: </Label>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <RadioButton GroupName="sex" Name="sex1"  Grid.Column="0" IsChecked="True">Male</RadioButton>
+            <RadioButton GroupName="sex" Name="sex2" Grid.Column="1">Female</RadioButton>
+        </Grid>
+        <Button Content="Create User" Click="CreateUser" Grid.Row="3" Margin="5,5">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Text.Length, ElementName=nameInput, UpdateSourceTrigger=PropertyChanged}" Value="0"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>

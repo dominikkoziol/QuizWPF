@@ -13,7 +13,7 @@ namespace Quiz.Models
         public int Id { get; set; }
         public string Nick { get; set; }
         public SexEnum Sex { get; set; }
-
+        public ICollection<Models.Quiz> Quizzes { get; set; }
 
         public enum SexEnum
         {

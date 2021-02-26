@@ -10,8 +10,9 @@ namespace Quiz.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
+        public ICollection<Question> Questions { get; set; }
     }
 }
