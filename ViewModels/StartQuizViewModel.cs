@@ -13,11 +13,20 @@ namespace Quiz.ViewModels
 {
     public class StartQuizViewModel: INotifyPropertyChanged
     {
+        /// <summary>
+        /// List of user
+        /// </summary>
         public User User { get; set; }
+        /// <summary>
+        /// List of categories
+        /// </summary>
         public List<Category> Categories { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Download data from db
+        /// </summary>
         public async Task InitAsync(int id)
         {
             using(var context = new DefaultContext())

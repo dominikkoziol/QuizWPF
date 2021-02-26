@@ -17,8 +17,11 @@ namespace Quiz.ViewModels.Dialogs
         public event PropertyChangedEventHandler PropertyChanged;
         public int CurrentIndex = 0;
         private Models.Quiz Quiz { get; set; }
-         public int CurrentQuestionIndex { get; set; } = 1;
+        public int CurrentQuestionIndex { get; set; } = 1;
 
+        /// <summary>
+        /// Download data from db
+        /// </summary>
         public async Task InitAsync(int categoryId, int userId)
         {
             using(var context = new DefaultContext())
@@ -35,7 +38,9 @@ namespace Quiz.ViewModels.Dialogs
             }
            
         }
-
+        /// <summary>
+        /// Change question
+        /// </summary>
         public bool NextQuestion()
         {
             CurrentIndex++;
@@ -47,6 +52,10 @@ namespace Quiz.ViewModels.Dialogs
                 return false;
             }
         }
+        /// <summary>
+        /// Finish quiz, get scores
+        /// </summary>
+        /// <returns></returns>
         public async Task Finish()
         {
             int result = 0;

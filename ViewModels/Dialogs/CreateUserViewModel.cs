@@ -13,6 +13,12 @@ namespace Quiz.ViewModels.Dialogs
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Create user and save data to db
+        /// </summary>
+        /// <param name="name">Name of user</param>
+        /// <param name="sex">Sex of user</param>
+        /// <returns>Return true if everything is success</returns>
         public async Task<bool> CreateUser(string name, SexEnum sex)
         {
             try

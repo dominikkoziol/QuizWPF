@@ -19,7 +19,9 @@ namespace Quiz.ViewModels
         public ObservableCollection<User> Users { get; set; }
         public User User;
 
-
+        /// <summary>
+        /// Download data from db
+        /// </summary>
         public async Task InitAsync()
         {
             using (var context = new DefaultContext())
@@ -27,7 +29,9 @@ namespace Quiz.ViewModels
                 this.Users = new ObservableCollection<User>(await context.Users.ToListAsync());
             }
         }
-
+        /// <summary>
+        /// Remove user from db and locally
+        /// </summary>
         public async Task RemoveUser(int id)
         {
             using (var context = new DefaultContext())
