@@ -11,18 +11,29 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            
-            
-            
+            <RowDefinition Height="*"></RowDefinition>
+
+
+
             <!--<RadioButton GroupName="sex" Name="sex1"  Grid.Column="0" IsChecked="True">Male</RadioButton>-->
             <!--<RadioButton GroupName="sex" Name="sex2" Grid.Column="1">Female</RadioButton>-->
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="{Binding CurrentQuestionIndexText,  StringFormat='Question {0} of 5'}" FontSize="35" />
+        <TextBlock Grid.Row="0" Text="{Binding CurrentQuestionIndex,  StringFormat='Question {0} of 5'}" FontSize="35" />
+        <Grid Margin="0 20 0 0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding CurrentQuestion.QuestionDescription}" />
+            <RadioButton GroupName="answer"  Grid.Row="1" Name="answerA" Content="{Binding CurrentQuestion.AnswerA}" Click="answer_Click"></RadioButton>
+            <RadioButton GroupName="answer"  Grid.Row="2" Name="answerB" Content="{Binding CurrentQuestion.AnswerB}" Click="answer_Click"></RadioButton>
+            <RadioButton GroupName="answer"  Grid.Row="3" Name="answerC" Content="{Binding CurrentQuestion.AnswerC}" Click="answer_Click"></RadioButton>
+            <RadioButton GroupName="answer"  Grid.Row="4" Name="answerD" Content="{Binding CurrentQuestion.AnswerD}" Click="answer_Click"></RadioButton>
+            <Button Click="Button_Click_Next_Question" Content="Next question" Name="next" Grid.Row="4" Width="150" HorizontalAlignment="Left" Margin="0,40,0,-40"></Button>
+        </Grid>
     </Grid>
 </Window>

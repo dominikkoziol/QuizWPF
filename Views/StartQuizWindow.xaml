@@ -59,12 +59,12 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"></ColumnDefinition>
-                                <ColumnDefinition Width="40"></ColumnDefinition>
-                                <ColumnDefinition Width="40"></ColumnDefinition>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding FinishTime}" />
-                            <TextBlock Grid.Column="1" Text="{Binding CollectedScores}" />
-                            <TextBlock Grid.Column="2" Text="{Binding Category.CategoryName}"></TextBlock>
+                            <TextBlock Grid.Column="0" Margin="15 0 0 0" Text="{Binding FinishTime}" />
+                            <TextBlock Grid.Column="1" Margin="15 0 0 0" Text="{Binding CollectedScores}" />
+                            <TextBlock Grid.Column="2" Margin="15 0 0 0" Text="{Binding Category.CategoryName}"></TextBlock>
                         </Grid>
                    
                     </DataTemplate>

@@ -20,17 +20,44 @@ namespace Quiz.Views.Dialogs
     {
         private GameViewModel _gameViewModel { get; set; } = new GameViewModel();
         private int _categoryId { get; set; }
-        public GameWindow(int categoryId)
+        private int _userId { get; set; }
+        private bool _isButtonEnabled { get; set; } = false;
+        private RadioButton choosenAnswer { get; set; }
+        public GameWindow(int categoryId, int userId)
         {
             _categoryId = categoryId;
+            _userId = userId;
             InitializeComponent();
+            next.IsEnabled = false;
         }
 
         public override async void BeginInit()
         {
             base.BeginInit();
             DataContext = _gameViewModel;
-            await _gameViewModel.InitAsync(_categoryId);
+            await _gameViewModel.InitAsync(_categoryId, _userId);
+        }
+
+        private async void Button_Click_Next_Question(object sender, RoutedEventArgs e)
+        {
+            var isLast = _gameViewModel.NextQuestion();
+            if (isLast)
+            {
+                await _gameViewModel.Finish();
+                this.Close();
+            }
+
+            next.IsEnabled = false;
+            choosenAnswer.IsChecked = false;
+
+        }
+
+        private void answer_Click(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+            choosenAnswer = radioButton;
+            _gameViewModel.SetAnswer(radioButton.Name);
+            next.IsEnabled = true;
         }
     }
 }

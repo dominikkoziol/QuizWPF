@@ -16,14 +16,22 @@ namespace Quiz.ViewModels.Dialogs
         public Question CurrentQuestion { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public int CurrentIndex = 0;
-        private int CurrentQuestionIndex = 1;
-        public string CurrentQuestionIndexText = "1";
+        private Models.Quiz Quiz { get; set; }
+         public int CurrentQuestionIndex { get; set; } = 1;
 
-        public async Task InitAsync(int categoryId)
+        public async Task InitAsync(int categoryId, int userId)
         {
             using(var context = new DefaultContext())
             {
                 this.Questions = await context.Questions.Where(q => q.CategoryId == categoryId).OrderBy(q => new Guid()).Take(5).ToListAsync();
+                this.CurrentQuestion = this.Questions[0];
+                Quiz = new Models.Quiz()
+                {
+                    StartTime = DateTime.Now,
+                    Status = Models.Quiz.StatusEnum.InProgress,
+                    CategoryId = categoryId,
+                    UserId = userId
+                };
             }
            
         }
@@ -32,7 +40,6 @@ namespace Quiz.ViewModels.Dialogs
         {
             CurrentIndex++;
             CurrentQuestionIndex++;
-            CurrentQuestionIndexText = CurrentQuestionIndex.ToString();
             if (CurrentIndex == 5) return true;
             else
             {
@@ -40,10 +47,44 @@ namespace Quiz.ViewModels.Dialogs
                 return false;
             }
         }
-
-        public void SetAnswer()
+        public async Task Finish()
         {
-            //this.CurrentQuestion.Answer = 
+            int result = 0;
+            Questions.ForEach(element => {
+                if (element.CorrectAnswer == element.Answer)
+                {
+                    result += 1;
+                }
+            });
+
+            Quiz.CollectedScores = result;
+            Quiz.FinishTime = DateTime.Now;
+            Quiz.Status = Models.Quiz.StatusEnum.Finished;
+
+            using(var context = new DefaultContext())
+            {
+                context.Quizzes.Add(Quiz);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public void SetAnswer(string answer)
+        {
+            switch(answer) {
+                case "answerA":
+                    this.CurrentQuestion.Answer = Question.AnswerEnum.A; 
+                    break;
+                case "answerB":
+                    this.CurrentQuestion.Answer = Question.AnswerEnum.B;
+                    break;
+                case "answerC":
+                    this.CurrentQuestion.Answer = Question.AnswerEnum.C;
+                    break;
+                case "answerD":
+                    this.CurrentQuestion.Answer = Question.AnswerEnum.D;
+                    break;
+            }
+            //
         }
     }
 }

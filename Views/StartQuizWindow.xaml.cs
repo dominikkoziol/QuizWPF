@@ -3,7 +3,9 @@ using Quiz.ViewModels;
 using Quiz.Views.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -45,11 +47,18 @@ namespace Quiz.Views
         }
 
 
-        private void Button_Click_Start_Game(object sender, RoutedEventArgs e)
+        private async void Button_Click_Start_Game(object sender, RoutedEventArgs e)
         {
             var categoryId = ((Category)CategoryList.SelectedItem).Id;
-            var gameWindow = new GameWindow(categoryId);
+            var gameWindow = new GameWindow(categoryId, _userId);
             gameWindow.ShowDialog();
+            gameWindow.Closing += await ModalWindow_Closing(null, null);
         }
+        private async Task<CancelEventHandler> ModalWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            await _startQuizViewModel.InitAsync(_userId);
+            return null;
+        }
+
     }
 }
